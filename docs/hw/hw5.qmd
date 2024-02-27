@@ -6,3 +6,42 @@ editor: visual
 embed-resource: true
 ---
 
+## Homework 5
+
+Import Packages
+
+```{python}
+import altair as alt
+import pandas as pd
+```
+
+```{python}
+alt.data_transformers.disable_max_rows()
+```
+
+### Wide-to-long "Your Turn"
+
+Read in the data
+
+```{python}
+jobs_url = "https://cdn.jsdelivr.net/npm/vega-datasets@2.8.0/data/jobs.json"
+jobs = pd.read_json(jobs_url)
+```
+
+#### Part 1: Plot 1 (updated)
+```{python}
+alt.Chart(jobs).transform_pivot(
+    'year',
+    groupby=['sex', 'job'],
+    value='perc'
+).mark_circle().encode(
+    alt.X(field = "1950", type = "quantitative").scale(constant = 0.0001, type='symlog'),
+    alt.Y(field = "2000", type = "quantitative").scale(constant = 0.0001, type='symlog'),
+    tooltip=['job:N', 'sex:N']
+).properties(width = 400, height = 400
+).facet(
+  column = "sex"
+).configure_mark(
+    opacity=0.4
+)
+```
