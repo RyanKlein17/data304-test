@@ -13,6 +13,7 @@ Import Packages
 ```{python}
 import altair as alt
 import pandas as pd
+from altair import datum
 ```
 
 ```{python}
@@ -28,7 +29,7 @@ jobs_url = "https://cdn.jsdelivr.net/npm/vega-datasets@2.8.0/data/jobs.json"
 jobs = pd.read_json(jobs_url)
 ```
 
-#### Part 1: Plot 1 (updated)
+#### Part 1: Plot 1
 ```{python}
 alt.Chart(jobs).transform_pivot(
     'year',
@@ -45,3 +46,37 @@ alt.Chart(jobs).transform_pivot(
     opacity=0.4
 )
 ```
+
+#### Part 1: Plot 2
+```{python}
+base = alt.Chart(jobs).transform_pivot(
+    'year',
+    groupby=['sex', 'job', 'year', 'perc'],
+    value='perc'
+).encode(
+    alt.X(field = "year", type = "nominal"),
+    alt.Y(field = "perc", type = "quantitative").scale(constant = 0.0001, type='symlog'),
+    color="job:N"
+).properties(width = 600, height = 100
+).transform_filter(
+    (datum.job == "Farmer")
+)
+
+base2 = alt.Chart(jobs).transform_pivot(
+    'year',
+    groupby=['sex', 'job', 'year', 'perc'],
+    value='perc'
+).encode(
+    alt.X(field = "year", type = "nominal"),
+    alt.Y(field = "perc", type = "quantitative").scale(constant = 0.0001, type='symlog'),
+    color="job:N"
+).properties(width = 600, height = 100
+).transform_filter(
+    (datum.job == "Professor")
+)
+
+(base.mark_line() + base.mark_circle() + base2.mark_line() + base2.mark_circle()).facet(
+  row="sex"
+)
+```
+
