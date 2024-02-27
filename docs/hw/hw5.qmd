@@ -59,7 +59,7 @@ base = alt.Chart(jobs).transform_pivot(
     color="job:N"
 ).properties(width = 600, height = 100
 ).transform_filter(
-    (datum.job == "Farmer")
+    (datum.job == "Statistician / Actuary")
 )
 
 base2 = alt.Chart(jobs).transform_pivot(
@@ -72,7 +72,7 @@ base2 = alt.Chart(jobs).transform_pivot(
     color="job:N"
 ).properties(width = 600, height = 100
 ).transform_filter(
-    (datum.job == "Professor")
+    (datum.job == "Funeral Director")
 )
 
 (base.mark_line() + base.mark_circle() + base2.mark_line() + base2.mark_circle()).facet(
