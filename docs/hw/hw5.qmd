@@ -59,6 +59,39 @@ base = alt.Chart(jobs).transform_pivot(
     color="job:N"
 ).properties(width = 600, height = 100
 ).transform_filter(
+    (datum.job == "Farmer")
+)
+
+base2 = alt.Chart(jobs).transform_pivot(
+    'year',
+    groupby=['sex', 'job', 'year', 'perc'],
+    value='perc'
+).encode(
+    alt.X(field = "year", type = "nominal"),
+    alt.Y(field = "perc", type = "quantitative").scale(constant = 0.0001, type='symlog'),
+    color="job:N"
+).properties(width = 600, height = 100
+).transform_filter(
+    (datum.job == "Professor")
+)
+
+(base.mark_line() + base.mark_circle() + base2.mark_line() + base2.mark_circle()).facet(
+  row="sex"
+)
+```
+
+#### Part 1: Plot 3
+```{python}
+base = alt.Chart(jobs).transform_pivot(
+    'year',
+    groupby=['sex', 'job', 'year', 'perc'],
+    value='perc'
+).encode(
+    alt.X(field = "year", type = "nominal"),
+    alt.Y(field = "perc", type = "quantitative").scale(constant = 0.0001, type='symlog'),
+    color="job:N"
+).properties(width = 600, height = 100
+).transform_filter(
     (datum.job == "Statistician / Actuary")
 )
 
@@ -79,4 +112,11 @@ base2 = alt.Chart(jobs).transform_pivot(
   row="sex"
 )
 ```
+
+### Airports
+```{python}
+gapminder = pd.read_json("https://cdn.jsdelivr.net/npm/vega-datasets@1.29.0/data/gapminder.json")
+```
+
+
 
