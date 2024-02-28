@@ -1,0 +1,13 @@
+---
+title: "index"
+author: "Ryan Klein"
+format: html
+editor: visual
+---
+
+## Data 304 webpage
+
+Welcome to my Data 304 github webpage.  Homeworks are files are linked below.
+
+[Homework 5]("https://ryanklein17.github.io/data304-test/docs/hw/hw5.html")
+
