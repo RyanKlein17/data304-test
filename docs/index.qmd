@@ -9,6 +9,6 @@ editor: visual
 
 ### Author: Ryan Klein
 
-Welcome to my Data 304 github webpage. Homeworks are files are linked below.
+Welcome to my Data 304 github webpage. All of my homework will be linked below.
 
 [Homework 5](%22https://ryanklein17.github.io/data304-test/hw/hw5.html%22)
