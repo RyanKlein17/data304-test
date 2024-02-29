@@ -9,5 +9,5 @@ editor: visual
 
 Welcome to my Data 304 github webpage.  Homeworks are files are linked below.
 
-[Homework 5]("https://ryanklein17.github.io/data304-test/docs/hw/hw5.html")
+[Homework 5]("https://ryanklein17.github.io/data304-test/hw/hw5.html")
 
