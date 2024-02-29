@@ -5,9 +5,10 @@ format: html
 editor: visual
 ---
 
-## Data 304 webpage 
+## Data 304 webpage
+
 ### Author: Ryan Klein
 
 Welcome to my Data 304 github webpage. Homeworks are files are linked below.
 
-[Homework 5](%22https://ryanklein17.github.io/data304-test/docs/hw/hw5.html%22)
+[Homework 5](%22https://ryanklein17.github.io/data304-test/hw/hw5.html%22)
