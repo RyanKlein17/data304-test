@@ -114,22 +114,32 @@ base2 = alt.Chart(jobs).transform_pivot(
 ```
 
 ### Gapminder
+#### Part 2: Plot 1
 ```{python}
 from vega_datasets import data
 countries = alt.topo_feature('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json', feature='countries')
 country_map = alt.Chart(countries).mark_geoshape(
     fill='#aaaaaa',
-    stroke='#eeeeee'
+    stroke='#ffffff'
 ).project('mercator')
 
 country_map.properties(width = 600, height = 400)
 ```
 
 ```{python}
-
+# Import gapminder data
 gap_data = pd.read_json("https://cdn.jsdelivr.net/npm/vega-datasets@1.29.0/data/countries.json")
+
+# Selected data from the year 2000.
 gd2000 = gap_data.loc[gap_data['year'] == 2000] 
+
+# We changed the names of some of the countries so that they matched the labels within the map.  There were only two countries that had mislabeled data.
+gd2000.at[619, 'country'] = "United States of America"
+gd2000.at[189, 'country'] = "Dem. Rep. Congo"
+gd2000["country"][619]
+gd2000["country"][189]
 ```
+
 
 
 ```{python}
@@ -137,16 +147,39 @@ country_map.transform_lookup(
   lookup='properties.name',
   from_=alt.LookupData(gd2000, 'country', ['life_expect'])
   ).encode(
-    fill = "life_expect:Q",
-    stroke = "life_expect:Q"
+    fill = "life_expect:Q"
     ).properties(width = 600, height = 400)
 ```
+
+
+#### Part 2: Plot 2
 ```{python}
-print(gd2000)
+airport_data = pd.read_csv("https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/airports.csv")
+airports_per_state = airport_data.value_counts("state")
+airports_per_state
 ```
 
+```{python}
+states_url = 'https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/us-10m.json'
 
+states = alt.topo_feature(states_url , feature = 'states')
+state_map = alt.Chart(states).mark_geoshape(
+    fill = 'transparent',
+    stroke = 'steelblue'
+    # tried to add "tooltip = ['id:Q'] but this did not work.
+).project('albersUsa')
 
+state_map.properties(width = 500, height = 300)
+```
 
+```{python}
+import json 
+from urllib.request import urlopen
+state_json = json.load(urlopen(states_url))
+print(type(state_json))
+(state_json.keys())
+```
 
-
+```{python}
+print(state_json['objects']['states']['geometries'][0])
+```
