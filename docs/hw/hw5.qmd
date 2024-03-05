@@ -113,10 +113,40 @@ base2 = alt.Chart(jobs).transform_pivot(
 )
 ```
 
-### Airports
+### Gapminder
 ```{python}
-gapminder = pd.read_json("https://cdn.jsdelivr.net/npm/vega-datasets@1.29.0/data/gapminder.json")
+from vega_datasets import data
+countries = alt.topo_feature('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json', feature='countries')
+country_map = alt.Chart(countries).mark_geoshape(
+    fill='#aaaaaa',
+    stroke='#eeeeee'
+).project('mercator')
+
+country_map.properties(width = 600, height = 400)
 ```
+
+```{python}
+
+gap_data = pd.read_json("https://cdn.jsdelivr.net/npm/vega-datasets@1.29.0/data/countries.json")
+gd2000 = gap_data.loc[gap_data['year'] == 2000] 
+```
+
+
+```{python}
+country_map.transform_lookup(
+  lookup='properties.name',
+  from_=alt.LookupData(gd2000, 'country', ['life_expect'])
+  ).encode(
+    fill = "life_expect:Q",
+    stroke = "life_expect:Q"
+    ).properties(width = 600, height = 400)
+```
+```{python}
+print(gd2000)
+```
+
+
+
 
 
 
