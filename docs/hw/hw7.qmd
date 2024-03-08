@@ -9,19 +9,27 @@ embed-resources: true
 ## Homework 7
 
 Import Packages
+
 ```{python}
 import altair as alt
 import pandas as pd
 from altair import datum
 ```
 
+```{python}
+alt.data_transformers.disable_max_rows()
+```
+
 ### Part 1
+
 ```{python}
 gas_gap_data_url = "https://calvin-data304.netlify.app/data/pump_price_for_gasoline_us_per_liter.csv"
 gas_gap_data = pd.read_csv(gas_gap_data_url)
 gas_gap_data.head()
 ```
+
 We account for several label discrepencies between the datasets.
+
 ```{python}
 gas_gap_data.at[35, 'country'] = "Dem. Rep. Congo"
 gas_gap_data.at[172, 'country'] = "United States of America"
@@ -35,7 +43,6 @@ gas_gap_data.at[4, 'country'] = "United Arab Emirates"
 gas_gap_data.at[46, 'country'] = "Dominican Rep."
 gas_gap_data.at[108, 'country'] = "Macedonia"
 ```
-
 
 ```{python}
 countries = alt.topo_feature('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json', feature='countries')
@@ -59,3 +66,53 @@ country_map.transform_lookup(
 
 ### Part 2
 
+```{python}
+democracy_url = "https://calvin-data304.netlify.app/data/wvs.csv"
+democracy_data = pd.read_csv(democracy_url)
+```
+
+Wrangle the total number of respondants for each nation
+
+```{python}
+respondants_per_country = pd.DataFrame(democracy_data.value_counts("country"))
+respondants_per_country.reset_index(inplace=True)
+respondants_per_country = respondants_per_country.rename(columns={0:"total"})
+```
+
+```{python}
+base = alt.Chart(respondants_per_country).encode(
+    alt.X(field ='country', type="ordinal", sort="-y"),
+    alt.Y(field ='total', type="quantitative")
+).properties(width=300,height=300,title="Number of Respondants")
+base.mark_bar()
+```
+
+### Part 3
+```{python}
+age3_facet = alt.Chart(democracy_data).mark_boxplot(extent="min-max").encode(
+    alt.X(field = "age", type = "quantitative", title = "Age in Years"),
+    alt.Y(field = "age3", type = "nominal"),
+    alt.Color("age3:N")
+    #alt.Tooltip(["min(age)", "max(age)"])
+).properties(
+  width = 300, height = 75
+).facet(
+  facet = "country:O",
+  columns=3
+)
+age3_facet
+```
+```{python}
+age6_facet = alt.Chart(democracy_data).mark_boxplot(extent="min-max").encode(
+    alt.X(field = "age", type = "quantitative", title = "Age in Years"),
+    alt.Y(field = "age6", type = "nominal"),
+    alt.Color("age6:N")
+    #alt.Tooltip(["min(age)", "max(age)"])
+).properties(
+  width = 300, height = 150
+).facet(
+  facet = "country:O",
+  columns=3
+)
+age6_facet
+```

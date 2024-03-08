@@ -124,8 +124,8 @@ base2 = alt.Chart(jobs).transform_pivot(
 from vega_datasets import data
 countries = alt.topo_feature('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json', feature='countries')
 country_map = alt.Chart(countries).mark_geoshape(
-    fill='#aaaaaa',
-    stroke='#ffffff'
+    fill='#ffffff',
+    stroke='#aaaaaa'
 ).project('mercator')
 
 country_map.properties(width = 600, height = 400)
