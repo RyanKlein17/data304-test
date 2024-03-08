@@ -1,0 +1,61 @@
+---
+title: "hw7"
+author: "Ryan Klein"
+format: html
+editor: visual
+embed-resources: true
+---
+
+## Homework 7
+
+Import Packages
+```{python}
+import altair as alt
+import pandas as pd
+from altair import datum
+```
+
+### Part 1
+```{python}
+gas_gap_data_url = "https://calvin-data304.netlify.app/data/pump_price_for_gasoline_us_per_liter.csv"
+gas_gap_data = pd.read_csv(gas_gap_data_url)
+gas_gap_data.head()
+```
+We account for several label discrepencies between the datasets.
+```{python}
+gas_gap_data.at[35, 'country'] = "Dem. Rep. Congo"
+gas_gap_data.at[172, 'country'] = "United States of America"
+gas_gap_data.at[28, 'country'] = "Central African Rep."
+gas_gap_data.at[58, 'country'] = "United Kingdom"
+gas_gap_data.at[152, 'country'] = "S. Sudan"
+gas_gap_data.at[85, 'country'] = "Kyrgyzstan"
+gas_gap_data.at[19, 'country'] = "Bosnia and Herz."
+gas_gap_data.at[33, 'country'] = "Côte d'Ivoire"
+gas_gap_data.at[4, 'country'] = "United Arab Emirates"
+gas_gap_data.at[46, 'country'] = "Dominican Rep."
+gas_gap_data.at[108, 'country'] = "Macedonia"
+```
+
+
+```{python}
+countries = alt.topo_feature('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json', feature='countries')
+country_map = alt.Chart(countries).mark_geoshape(
+    fill='#aaaaaa',
+    stroke='#000000'
+).project('mercator')
+
+country_map.properties(width = 600, height = 400)
+```
+
+```{python}
+country_map.transform_lookup(
+  lookup='properties.name',
+  from_=alt.LookupData(gas_gap_data, 'country', ['2012'])
+  ).encode(
+    fill = "2012:Q",
+    tooltip = ["properties.name:O", "2012:Q"]
+    ).properties(width = 600, height = 400, title="Gas rate: US $ per liter")
+```
+
+### Part 2
+
