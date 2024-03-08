@@ -114,19 +114,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>alt.data_transformers.disable_max_rows()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>DataTransformerRegistry.enable('default')</code></pre>
 </div>
 </div>
-<section id="wide-to-long-your-turn" class="level3">
-<h3 class="anchored" data-anchor-id="wide-to-long-your-turn">Wide-to-long “Your Turn”</h3>
+<section id="part-1-wide-to-long-your-turn" class="level3">
+<h3 class="anchored" data-anchor-id="part-1-wide-to-long-your-turn">Part 1: Wide-to-long “Your Turn”</h3>
 <p>Read in the data</p>
 <div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>jobs_url <span class="op">=</span> <span class="st">"https://cdn.jsdelivr.net/npm/vega-datasets@2.8.0/data/jobs.json"</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>jobs <span class="op">=</span> pd.read_json(jobs_url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="part-1-plot-1" class="level4">
-<h4 class="anchored" data-anchor-id="part-1-plot-1">Part 1: Plot 1</h4>
+<section id="plot-1" class="level4">
+<h4 class="anchored" data-anchor-id="plot-1">Plot 1</h4>
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(jobs).transform_pivot(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'year'</span>,</span>
@@ -142,27 +142,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>).configure_mark(</span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    opacity<span class="op">=</span><span class="fl">0.4</span></span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<div class="cell-output cell-output-display" data-execution_count="4">
 
 
 <style>
-  #altair-viz-51d6a2daeb4b4652bf81cb8caf915e2b.vega-embed {
+  #altair-viz-fe0085bf59c14d2087f52fe5ce7d1a32.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-51d6a2daeb4b4652bf81cb8caf915e2b.vega-embed details,
-  #altair-viz-51d6a2daeb4b4652bf81cb8caf915e2b.vega-embed details summary {
+  #altair-viz-fe0085bf59c14d2087f52fe5ce7d1a32.vega-embed details,
+  #altair-viz-fe0085bf59c14d2087f52fe5ce7d1a32.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-51d6a2daeb4b4652bf81cb8caf915e2b"></div>
+<div id="altair-viz-fe0085bf59c14d2087f52fe5ce7d1a32"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-51d6a2daeb4b4652bf81cb8caf915e2b") {
-      outputDiv = document.getElementById("altair-viz-51d6a2daeb4b4652bf81cb8caf915e2b");
+    if (outputDiv.id !== "altair-viz-fe0085bf59c14d2087f52fe5ce7d1a32") {
+      outputDiv = document.getElementById("altair-viz-fe0085bf59c14d2087f52fe5ce7d1a32");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -213,8 +213,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="part-1-plot-2" class="level4">
-<h4 class="anchored" data-anchor-id="part-1-plot-2">Part 1: Plot 2</h4>
+<section id="plot-2" class="level4">
+<h4 class="anchored" data-anchor-id="plot-2">Plot 2</h4>
 <div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>base <span class="op">=</span> alt.Chart(jobs).transform_pivot(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'year'</span>,</span>
@@ -245,27 +245,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>(base.mark_line() <span class="op">+</span> base.mark_circle() <span class="op">+</span> base2.mark_line() <span class="op">+</span> base2.mark_circle()).facet(</span>
 <span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  row<span class="op">=</span><span class="st">"sex"</span></span>
 <span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
+<div class="cell-output cell-output-display" data-execution_count="5">
 
 
 <style>
-  #altair-viz-49e21cbef7d04df08ff35cc530996255.vega-embed {
+  #altair-viz-d01e4acb4c084a10b02ec713c55caa62.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-49e21cbef7d04df08ff35cc530996255.vega-embed details,
-  #altair-viz-49e21cbef7d04df08ff35cc530996255.vega-embed details summary {
+  #altair-viz-d01e4acb4c084a10b02ec713c55caa62.vega-embed details,
+  #altair-viz-d01e4acb4c084a10b02ec713c55caa62.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-49e21cbef7d04df08ff35cc530996255"></div>
+<div id="altair-viz-d01e4acb4c084a10b02ec713c55caa62"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-49e21cbef7d04df08ff35cc530996255") {
-      outputDiv = document.getElementById("altair-viz-49e21cbef7d04df08ff35cc530996255");
+    if (outputDiv.id !== "altair-viz-d01e4acb4c084a10b02ec713c55caa62") {
+      outputDiv = document.getElementById("altair-viz-d01e4acb4c084a10b02ec713c55caa62");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -316,8 +316,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="part-1-plot-3" class="level4">
-<h4 class="anchored" data-anchor-id="part-1-plot-3">Part 1: Plot 3</h4>
+<section id="plot-3" class="level4">
+<h4 class="anchored" data-anchor-id="plot-3">Plot 3</h4>
 <div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>base <span class="op">=</span> alt.Chart(jobs).transform_pivot(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'year'</span>,</span>
@@ -348,27 +348,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>(base.mark_line() <span class="op">+</span> base.mark_circle() <span class="op">+</span> base2.mark_line() <span class="op">+</span> base2.mark_circle()).facet(</span>
 <span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  row<span class="op">=</span><span class="st">"sex"</span></span>
 <span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div class="cell-output cell-output-display" data-execution_count="6">
 
 
 <style>
-  #altair-viz-a4e5af5635384eb0835118a7cc1061bf.vega-embed {
+  #altair-viz-4c7653bc2949426cbb9bbfd1586098e0.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-a4e5af5635384eb0835118a7cc1061bf.vega-embed details,
-  #altair-viz-a4e5af5635384eb0835118a7cc1061bf.vega-embed details summary {
+  #altair-viz-4c7653bc2949426cbb9bbfd1586098e0.vega-embed details,
+  #altair-viz-4c7653bc2949426cbb9bbfd1586098e0.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-a4e5af5635384eb0835118a7cc1061bf"></div>
+<div id="altair-viz-4c7653bc2949426cbb9bbfd1586098e0"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-a4e5af5635384eb0835118a7cc1061bf") {
-      outputDiv = document.getElementById("altair-viz-a4e5af5635384eb0835118a7cc1061bf");
+    if (outputDiv.id !== "altair-viz-4c7653bc2949426cbb9bbfd1586098e0") {
+      outputDiv = document.getElementById("altair-viz-4c7653bc2949426cbb9bbfd1586098e0");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -420,10 +420,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="gapminder" class="level3">
-<h3 class="anchored" data-anchor-id="gapminder">Gapminder</h3>
-<section id="part-2-plot-1" class="level4">
-<h4 class="anchored" data-anchor-id="part-2-plot-1">Part 2: Plot 1</h4>
+<section id="part-2-maps" class="level3">
+<h3 class="anchored" data-anchor-id="part-2-maps">Part 2: Maps</h3>
+<section id="plot-1-1" class="level4">
+<h4 class="anchored" data-anchor-id="plot-1-1">Plot 1</h4>
 <div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> vega_datasets <span class="im">import</span> data</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> alt.topo_feature(<span class="st">'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'</span>, feature<span class="op">=</span><span class="st">'countries'</span>)</span>
@@ -433,26 +433,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>).project(<span class="st">'mercator'</span>)</span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>country_map.properties(width <span class="op">=</span> <span class="dv">600</span>, height <span class="op">=</span> <span class="dv">400</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="23">
+<div class="cell-output cell-output-display" data-execution_count="7">
 
 <style>
-  #altair-viz-637d910c0ebe412fa721f6dd831efdc6.vega-embed {
+  #altair-viz-67575baa478249368a09dd090c02419d.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-637d910c0ebe412fa721f6dd831efdc6.vega-embed details,
-  #altair-viz-637d910c0ebe412fa721f6dd831efdc6.vega-embed details summary {
+  #altair-viz-67575baa478249368a09dd090c02419d.vega-embed details,
+  #altair-viz-67575baa478249368a09dd090c02419d.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-637d910c0ebe412fa721f6dd831efdc6"></div>
+<div id="altair-viz-67575baa478249368a09dd090c02419d"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-637d910c0ebe412fa721f6dd831efdc6") {
-      outputDiv = document.getElementById("altair-viz-637d910c0ebe412fa721f6dd831efdc6");
+    if (outputDiv.id !== "altair-viz-67575baa478249368a09dd090c02419d") {
+      outputDiv = document.getElementById("altair-viz-67575baa478249368a09dd090c02419d");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -514,7 +514,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>gd2000.at[<span class="dv">189</span>, <span class="st">'country'</span>] <span class="op">=</span> <span class="st">"Dem. Rep. Congo"</span></span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>gd2000[<span class="st">"country"</span>][<span class="dv">619</span>]</span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>gd2000[<span class="st">"country"</span>][<span class="dv">189</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="24">
+<div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>'Dem. Rep. Congo'</code></pre>
 </div>
 </div>
@@ -525,26 +525,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  ).encode(</span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    fill <span class="op">=</span> <span class="st">"life_expect:Q"</span></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    ).properties(width <span class="op">=</span> <span class="dv">600</span>, height <span class="op">=</span> <span class="dv">400</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="25">
+<div class="cell-output cell-output-display" data-execution_count="9">
 
 <style>
-  #altair-viz-cf1c764b64b44f49a683a428140e754a.vega-embed {
+  #altair-viz-66dbf0acc986473fa5d6c716b2882338.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-cf1c764b64b44f49a683a428140e754a.vega-embed details,
-  #altair-viz-cf1c764b64b44f49a683a428140e754a.vega-embed details summary {
+  #altair-viz-66dbf0acc986473fa5d6c716b2882338.vega-embed details,
+  #altair-viz-66dbf0acc986473fa5d6c716b2882338.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-cf1c764b64b44f49a683a428140e754a"></div>
+<div id="altair-viz-66dbf0acc986473fa5d6c716b2882338"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-cf1c764b64b44f49a683a428140e754a") {
-      outputDiv = document.getElementById("altair-viz-cf1c764b64b44f49a683a428140e754a");
+    if (outputDiv.id !== "altair-viz-66dbf0acc986473fa5d6c716b2882338") {
+      outputDiv = document.getElementById("altair-viz-66dbf0acc986473fa5d6c716b2882338");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -595,8 +595,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="part-2-plot-2" class="level4">
-<h4 class="anchored" data-anchor-id="part-2-plot-2">Part 2: Plot 2</h4>
+<section id="plot-2-1" class="level4">
+<h4 class="anchored" data-anchor-id="plot-2-1">Plot 2</h4>
 <div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>airport_data <span class="op">=</span> pd.read_csv(<span class="st">"https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/airports.csv"</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>airports_per_state <span class="op">=</span> pd.DataFrame(airport_data.value_counts(<span class="st">"state"</span>))</span>
@@ -612,26 +612,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>).project(<span class="st">'albersUsa'</span>)</span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>state_map.properties(width <span class="op">=</span> <span class="dv">500</span>, height <span class="op">=</span> <span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="27">
+<div class="cell-output cell-output-display" data-execution_count="11">
 
 <style>
-  #altair-viz-fbb1198336b642158f58c5dd11085152.vega-embed {
+  #altair-viz-eef79a9f5b8f414e916e0d30f58d13ed.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-fbb1198336b642158f58c5dd11085152.vega-embed details,
-  #altair-viz-fbb1198336b642158f58c5dd11085152.vega-embed details summary {
+  #altair-viz-eef79a9f5b8f414e916e0d30f58d13ed.vega-embed details,
+  #altair-viz-eef79a9f5b8f414e916e0d30f58d13ed.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-fbb1198336b642158f58c5dd11085152"></div>
+<div id="altair-viz-eef79a9f5b8f414e916e0d30f58d13ed"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-fbb1198336b642158f58c5dd11085152") {
-      outputDiv = document.getElementById("altair-viz-fbb1198336b642158f58c5dd11085152");
+    if (outputDiv.id !== "altair-viz-eef79a9f5b8f414e916e0d30f58d13ed") {
+      outputDiv = document.getElementById("altair-viz-eef79a9f5b8f414e916e0d30f58d13ed");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -707,26 +707,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  ).encode(</span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    fill <span class="op">=</span> <span class="st">"total:Q"</span></span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    ).properties(width <span class="op">=</span> <span class="dv">600</span>, height <span class="op">=</span> <span class="dv">400</span>, title<span class="op">=</span><span class="st">'Could there be a Link between Land Mass and Number of Airports?'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="31">
+<div class="cell-output cell-output-display" data-execution_count="15">
 
 <style>
-  #altair-viz-247cc44d210b45dcb187a48e411ebde4.vega-embed {
+  #altair-viz-ee976c281cb544dd813e5cbc20fff6c6.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-247cc44d210b45dcb187a48e411ebde4.vega-embed details,
-  #altair-viz-247cc44d210b45dcb187a48e411ebde4.vega-embed details summary {
+  #altair-viz-ee976c281cb544dd813e5cbc20fff6c6.vega-embed details,
+  #altair-viz-ee976c281cb544dd813e5cbc20fff6c6.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-247cc44d210b45dcb187a48e411ebde4"></div>
+<div id="altair-viz-ee976c281cb544dd813e5cbc20fff6c6"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-247cc44d210b45dcb187a48e411ebde4") {
-      outputDiv = document.getElementById("altair-viz-247cc44d210b45dcb187a48e411ebde4");
+    if (outputDiv.id !== "altair-viz-ee976c281cb544dd813e5cbc20fff6c6") {
+      outputDiv = document.getElementById("altair-viz-ee976c281cb544dd813e5cbc20fff6c6");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -777,6 +777,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
+</section>
+<section id="part-3-visualization-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="part-3-visualization-analysis">Part 3: Visualization Analysis</h3>
+<p>Plot pulled from R/dataisbeautiful.</p>
+<p><a href="https://www.reddit.com/r/dataisbeautiful/comments/11p3555/oc_size_of_bank_failures_since_2000/?utm_source=share&amp;utm_medium=web2x&amp;context=3" class="uri">https://www.reddit.com/r/dataisbeautiful/comments/11p3555/oc_size_of_bank_failures_since_2000/?utm_source=share&amp;utm_medium=web2x&amp;context=3</a></p>
+<ol type="1">
+<li>Created shortly after the collapse of Silicon Valley Bank in 2023, this visualization shows various bank failures throughout history and allows viewers to draw their own conclusions. However, the authors are attempting to guide the readers to fathom the size of the ‘Washington Mutual’ and the ‘Silicon Valley’ bank failures in comparison to other bank failures. A story I take from this plot is that Silicon Valley Bank failure is one of the worst in US history. However, there has been at least one larger bank failure in history and the economy recovered, giving us hope that the economy would recover from this bank failure.</li>
+<li>This plot does a good job identifying the value of interest by highlighting it with light blue. The goal of the plot was to compare the size of the Silicon Valley Bank failure to other failures in history. The visualization does a nice job doing this by using size to map size of the each failure.</li>
+<li>With the skills learned in the course, we would be able to recreate much of this visualization. Some of the recreateable aspects would include the marks, the text, the sizes and the colors.</li>
+<li>Not sure if it has been covered, but I am confused on how to implement the structure of the plot. The data appears to be organized into a circle with no apparent pattern that is controlled by a variable.</li>
+</ol>
 </section>
 </section>
 

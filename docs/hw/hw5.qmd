@@ -20,7 +20,7 @@ from altair import datum
 alt.data_transformers.disable_max_rows()
 ```
 
-### Wide-to-long "Your Turn"
+### Part 1: Wide-to-long "Your Turn"
 
 Read in the data
 
@@ -29,7 +29,8 @@ jobs_url = "https://cdn.jsdelivr.net/npm/vega-datasets@2.8.0/data/jobs.json"
 jobs = pd.read_json(jobs_url)
 ```
 
-#### Part 1: Plot 1
+#### Plot 1
+
 ```{python}
 alt.Chart(jobs).transform_pivot(
     'year',
@@ -47,7 +48,8 @@ alt.Chart(jobs).transform_pivot(
 )
 ```
 
-#### Part 1: Plot 2
+#### Plot 2
+
 ```{python}
 base = alt.Chart(jobs).transform_pivot(
     'year',
@@ -80,7 +82,8 @@ base2 = alt.Chart(jobs).transform_pivot(
 )
 ```
 
-#### Part 1: Plot 3
+#### Plot 3
+
 ```{python}
 base = alt.Chart(jobs).transform_pivot(
     'year',
@@ -113,8 +116,10 @@ base2 = alt.Chart(jobs).transform_pivot(
 )
 ```
 
-### Gapminder
-#### Part 2: Plot 1
+### Part 2: Maps
+
+#### Plot 1
+
 ```{python}
 from vega_datasets import data
 countries = alt.topo_feature('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json', feature='countries')
@@ -140,8 +145,6 @@ gd2000["country"][619]
 gd2000["country"][189]
 ```
 
-
-
 ```{python}
 country_map.transform_lookup(
   lookup='properties.name',
@@ -151,8 +154,8 @@ country_map.transform_lookup(
     ).properties(width = 600, height = 400)
 ```
 
+#### Plot 2
 
-#### Part 2: Plot 2
 ```{python}
 airport_data = pd.read_csv("https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/airports.csv")
 airports_per_state = pd.DataFrame(airport_data.value_counts("state"))
@@ -195,3 +198,14 @@ state_map.transform_lookup(
     fill = "total:Q"
     ).properties(width = 600, height = 400, title='Could there be a Link between Land Mass and Number of Airports?')
 ```
+
+### Part 3: Visualization Analysis
+
+Plot pulled from R/dataisbeautiful.
+
+<https://www.reddit.com/r/dataisbeautiful/comments/11p3555/oc_size_of_bank_failures_since_2000/?utm_source=share&utm_medium=web2x&context=3>
+
+1.  Created shortly after the collapse of Silicon Valley Bank in 2023, this visualization shows various bank failures throughout history and allows viewers to draw their own conclusions. However, the authors are attempting to guide the readers to fathom the size of the 'Washington Mutual' and the 'Silicon Valley' bank failures in comparison to other bank failures. A story I take from this plot is that Silicon Valley Bank failure is one of the worst in US history. However, there has been at least one larger bank failure in history and the economy recovered, giving us hope that the economy would recover from this bank failure.
+2.  This plot does a good job identifying the value of interest by highlighting it with light blue. The goal of the plot was to compare the size of the Silicon Valley Bank failure to other failures in history. The visualization does a nice job doing this by using size to map size of the each failure.
+3.  With the skills learned in the course, we would be able to recreate much of this visualization. Some of the recreateable aspects would include the marks, the text, the sizes and the colors.
+4.  Not sure if it has been covered, but I am confused on how to implement the structure of the plot. The data appears to be organized into a circle with no apparent pattern that is controlled by a variable.
