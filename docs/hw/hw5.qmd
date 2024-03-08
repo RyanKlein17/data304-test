@@ -155,18 +155,17 @@ country_map.transform_lookup(
 #### Part 2: Plot 2
 ```{python}
 airport_data = pd.read_csv("https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/airports.csv")
-airports_per_state = airport_data.value_counts("state")
-airports_per_state
+airports_per_state = pd.DataFrame(airport_data.value_counts("state"))
+airports_per_state.reset_index(inplace=True)
+airports_per_state = airports_per_state.rename(columns={0:"total"})
 ```
 
 ```{python}
-states_url = 'https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/us-10m.json'
-
+states_url = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json'
 states = alt.topo_feature(states_url , feature = 'states')
 state_map = alt.Chart(states).mark_geoshape(
     fill = 'transparent',
     stroke = 'steelblue'
-    # tried to add "tooltip = ['id:Q'] but this did not work.
 ).project('albersUsa')
 
 state_map.properties(width = 500, height = 300)
@@ -177,9 +176,22 @@ import json
 from urllib.request import urlopen
 state_json = json.load(urlopen(states_url))
 print(type(state_json))
-(state_json.keys())
 ```
 
 ```{python}
 print(state_json['objects']['states']['geometries'][0])
+```
+
+```{python}
+conversion_data = pd.read_csv("https://raw.githubusercontent.com/jasonong/List-of-US-States/master/states.csv")
+airports_per_state = airports_per_state.merge(conversion_data, left_on='state', right_on='Abbreviation', suffixes=('_left', '_right'))
+```
+
+```{python}
+state_map.transform_lookup(
+  lookup='properties.name',
+  from_=alt.LookupData(airports_per_state, 'State', ['total'])
+  ).encode(
+    fill = "total:Q"
+    ).properties(width = 600, height = 400, title='Could there be a Link between Land Mass and Number of Airports?')
 ```
