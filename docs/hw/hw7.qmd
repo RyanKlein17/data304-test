@@ -88,6 +88,7 @@ base.mark_bar()
 ```
 
 ### Part 3
+Age3
 ```{python}
 age3_facet = alt.Chart(democracy_data).mark_boxplot(extent="min-max").encode(
     alt.X(field = "age", type = "quantitative", title = "Age in Years"),
@@ -102,12 +103,12 @@ age3_facet = alt.Chart(democracy_data).mark_boxplot(extent="min-max").encode(
 )
 age3_facet
 ```
+Age6
 ```{python}
 age6_facet = alt.Chart(democracy_data).mark_boxplot(extent="min-max").encode(
     alt.X(field = "age", type = "quantitative", title = "Age in Years"),
     alt.Y(field = "age6", type = "nominal"),
     alt.Color("age6:N")
-    #alt.Tooltip(["min(age)", "max(age)"])
 ).properties(
   width = 300, height = 150
 ).facet(
@@ -116,3 +117,54 @@ age6_facet = alt.Chart(democracy_data).mark_boxplot(extent="min-max").encode(
 )
 age6_facet
 ```
+
+### Part 4
+
+Skipped.  Will come back to later if time allows.
+
+### Part 5
+```{python}
+lines = alt.Chart(democracy_data).mark_line().encode(
+    x=alt.X(field = "age6", type = "ordinal", sort = "-x"),
+    y=alt.Y("mean(democracy_importance):Q"),
+).properties(
+  width = 200, height = 400
+)
+
+bands = alt.Chart(democracy_data).mark_errorband().encode(
+    x=alt.X(field = "age6", type = "ordinal", sort = "-x", title = "Age Grouping"),
+    y=alt.Y(field = "democracy_importance", type = "quantitative", title = "Average importance of democracy"),
+).properties(
+  width = 200, height = 400,
+  title = ""
+)
+alt.layer(lines + bands).facet(
+  facet = "country:O"
+)
+```
+
+### Part 6
+```{python}
+lines = alt.Chart(democracy_data).mark_line().encode(
+    x=alt.X(field = "age", type = "ordinal", sort = "-x"),
+    y=alt.Y("mean(democracy_importance):Q"),
+).properties(
+  width = 200, height = 400
+)
+
+bands = alt.Chart(democracy_data).mark_errorband().encode(
+    x=alt.X(field = "age", type = "ordinal", sort = "-x", title = "Age Grouping"),
+    y=alt.Y(field = "democracy_importance", type = "quantitative", title = "Average importance of democracy"),
+).properties(
+  width = 200, height = 400,
+  title = ""
+)
+alt.layer(lines + bands).facet(
+  facet = "country:O"
+)
+```
+Using "age" instead of "age6" makes the graphic worse, because "age" will calculate the statistics for each of the ages present in the dataset.  On the other hand, the "age6" is useful, because it bins each of the cases into 6 bins that are defined by an age range.  This makes the plot much less chaotic and much more interpretible.
+
+
+
+
