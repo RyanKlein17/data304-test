@@ -19,6 +19,7 @@ alt.data_transformers.disable_max_rows()
 ```
 
 ### Part 4
+
 ```{python}
 democracy_url = "https://calvin-data304.netlify.app/data/wvs.csv"
 democracy_data = pd.read_csv(democracy_url)
@@ -47,6 +48,7 @@ alt.layer(lines + bands).facet(
 ```
 
 ### Part 5
+
 ```{python}
 lines = alt.Chart(democracy_data).mark_line().encode(
     x=alt.X(field = "age6", type = "ordinal", sort = "-x"),
@@ -68,6 +70,7 @@ alt.layer(lines + bands).facet(
 ```
 
 ### Part 6
+
 ```{python}
 lines = alt.Chart(democracy_data).mark_line().encode(
     x=alt.X(field = "age", type = "ordinal", sort = "-x"),
@@ -87,9 +90,11 @@ alt.layer(lines + bands).facet(
   facet = "country:O"
 )
 ```
-Using "age" instead of "age6" makes the graphic worse, because "age" will calculate the statistics for each of the ages present in the dataset.  On the other hand, the "age6" is useful, because it bins each of the cases into 6 bins that are defined by an age range.  This makes the plot much less chaotic and much more interpretible.
+
+Using "age" instead of "age6" makes the graphic worse, because "age" will calculate the statistics for each of the ages present in the dataset. On the other hand, the "age6" is useful, because it bins each of the cases into 6 bins that are defined by an age range. This makes the plot much less chaotic and much more interpretible.
 
 ### Part 7
+
 ```{python}
 loess_chart_base = alt.Chart(democracy_data).encode(
   x=alt.X(field = "age6", type = "ordinal", sort = "-x", title = "Age Grouping"),
@@ -99,7 +104,7 @@ loess_chart_base = alt.Chart(democracy_data).encode(
     title = ""
   )
 
-loess_chart_base.transform_loess('age6', 'democracy_importance').mark_line().facet(
+loess_chart_base.transform_loess('age6', 'democracy_importance', groupby=["country"]).mark_line().facet(
     facet = "country:O"
   )
 ```
