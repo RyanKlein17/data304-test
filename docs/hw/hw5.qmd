@@ -146,13 +146,18 @@ gd2000["country"][189]
 ```
 
 ```{python}
-country_map.transform_lookup(
+chloropleth_with_country = country_map.transform_lookup(
   lookup='properties.name',
   from_=alt.LookupData(gd2000, 'country', ['life_expect'])
   ).encode(
     fill = "life_expect:Q"
     ).properties(width = 600, height = 400)
 ```
+
+```{python}
+country_map + chloropleth_with_country
+```
+
 
 #### Plot 2
 

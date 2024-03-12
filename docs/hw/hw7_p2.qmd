@@ -23,27 +23,28 @@ alt.data_transformers.disable_max_rows()
 ```{python}
 democracy_url = "https://calvin-data304.netlify.app/data/wvs.csv"
 democracy_data = pd.read_csv(democracy_url)
-democracy_data['tens_only'] = (democracy_data['democracy_importance'] == 10).astype(int)*10
+democracy_data['tens_only'] = (democracy_data['democracy_importance'] == 10).astype(int)
 ```
 
 ```{python}
-lines = alt.Chart(democracy_data).mark_line().encode(
-    x=alt.X(field = "age6", type = "ordinal", sort = "-x"),
-    y=alt.Y(field = "mean(tens_only)", type = "quantitative", title = "Average importance of democracy"),
+lines = alt.Chart(democracy_data).mark_line(point = True).encode(
+    x=alt.X(field = "age6", type = "nominal", sort = "-x"),
+    y=alt.Y("mean(tens_only):Q"),
 ).properties(
   width = 200, height = 400,
   title = ""
 )
 
 bands = alt.Chart(democracy_data).mark_errorband().encode(
-    x=alt.X(field = "age6", type = "ordinal", sort = "-x", title = "Age Grouping"),
-    y=alt.Y(field = "tens_only", type = "quantitative", title = "Average importance of democracy")
+    x=alt.X(field = "age6", type = "nominal", sort = "-x", title = "Age Grouping"),
+    y=alt.Y(field = "tens_only", type = "quantitative", title = "Average importance of democracy", scale=alt.Scale(domain=[0,1])).axis(format='%')
 ).properties(
   width = 200, height = 400,
   title = ""
 )
-alt.layer(lines + bands).facet(
-  facet = "country:O"
+graph4 = lines + bands
+graph4.facet(
+  column = "country:N"
 )
 ```
 
@@ -73,14 +74,14 @@ alt.layer(lines + bands).facet(
 
 ```{python}
 lines = alt.Chart(democracy_data).mark_line().encode(
-    x=alt.X(field = "age", type = "ordinal", sort = "-x"),
+    x=alt.X(field = "age", type = "quantitative", sort = "-x"),
     y=alt.Y("mean(democracy_importance):Q"),
 ).properties(
   width = 200, height = 400
 )
 
 bands = alt.Chart(democracy_data).mark_errorband().encode(
-    x=alt.X(field = "age", type = "ordinal", sort = "-x", title = "Age Grouping"),
+    x=alt.X(field = "age", type = "quantitative", sort = "-x", title = "Age Grouping"),
     y=alt.Y(field = "democracy_importance", type = "quantitative", title = "Average importance of democracy"),
 ).properties(
   width = 200, height = 400,
@@ -89,6 +90,7 @@ bands = alt.Chart(democracy_data).mark_errorband().encode(
 alt.layer(lines + bands).facet(
   facet = "country:O"
 )
+
 ```
 
 Using "age" instead of "age6" makes the graphic worse, because "age" will calculate the statistics for each of the ages present in the dataset. On the other hand, the "age6" is useful, because it bins each of the cases into 6 bins that are defined by an age range. This makes the plot much less chaotic and much more interpretible.
@@ -97,14 +99,14 @@ Using "age" instead of "age6" makes the graphic worse, because "age" will calcul
 
 ```{python}
 loess_chart_base = alt.Chart(democracy_data).encode(
-  x=alt.X(field = "age6", type = "ordinal", sort = "-x", title = "Age Grouping"),
+  x=alt.X(field = "age", type = "quantitative", sort = "-x", title = "Age Grouping"),
   y=alt.Y(field = "democracy_importance", type = "quantitative", title = "Average importance of democracy"),
   ).properties(
     width = 200, height = 400,
     title = ""
   )
 
-loess_chart_base.transform_loess('age6', 'democracy_importance', groupby=["country"]).mark_line().facet(
+loess_chart_base.transform_loess('age', 'democracy_importance', groupby=["country"]).mark_line().facet(
     facet = "country:O"
   )
 ```

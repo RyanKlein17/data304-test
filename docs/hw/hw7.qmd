@@ -55,13 +55,16 @@ country_map.properties(width = 600, height = 400)
 ```
 
 ```{python}
-country_map.transform_lookup(
+choropleth = country_map.transform_lookup(
   lookup='properties.name',
   from_=alt.LookupData(gas_gap_data, 'country', ['2012'])
   ).encode(
     fill = "2012:Q",
+    stroke = alt.Stroke(value="black"),
     tooltip = ["properties.name:O", "2012:Q"]
     ).properties(width = 600, height = 400, title="Gas rate: US $ per liter")
+    
+country_map + choropleth
 ```
 
 ### Part 2
