@@ -129,3 +129,47 @@ gas_chart = alt.Chart(merged_gas_data).mark_point().encode(
 )
 gas_chart
 ```
+
+
+### Part 4
+```{python}
+mil_burden_data = pd.read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQ1VEvkp0P9PDBKB1CqUMxezcMrwY_uasIMl8BXeI2AWyrfDKGuas-ABT7iEkCT2xhf_eeHpk2KUZ-E/pub?gid=750436318&single=true&output=csv")
+```
+```{python}
+gdp_data=pd.read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQNbLPnp92AH32qhzqumYipuIpeOvHdhTyVCYk2bUXfNHsaTfJc6E946tHdmwVH4vcTaO8P5vfQSIyv/pub?gid=1425435438&single=true&output=csv")
+```
+
+```{python}
+# Given the countries defense burden and their gpd, we calculate their defense budget in 2022
+mil_burden_data['2022_def_total_spent'] = (mil_burden_data['2022'] * gdp_data["2022"])/100
+mil_burden_data['gdp_2022'] = gdp_data['2022']
+```
+
+```{python}
+countries = alt.topo_feature('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json', feature='countries')
+country_map = alt.Chart(countries).mark_geoshape(
+    fill='#aaaaaa',
+    stroke='#000000'
+).project('mercator')
+
+country_map.properties(width = 600, height = 400)
+```
+
+```{python}
+choropleth = country_map.transform_lookup(
+  lookup='properties.name',
+  from_=alt.LookupData(mil_burden_data, 'Country Name', ['2022'])
+  ).encode(
+    fill = "2022:Q",
+    stroke = alt.Stroke(value="black"),
+    tooltip = ["properties.name:O", "2022:Q"]
+    ).properties(width = 600, height = 400)
+    
+country_map + choropleth
+```
+
+
+
+
+
+
