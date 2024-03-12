@@ -1,0 +1,131 @@
+---
+title: "Final Portfolio for Data 304"
+author: "Ryan Klein"
+format: html
+editor: visual
+embed-resources: true
+---
+
+Import Packages
+
+```{python}
+import altair as alt
+import pandas as pd
+from altair import datum
+alt.data_transformers.disable_max_rows()
+```
+
+### Part 1: HW3 Revisions
+
+a. I thought that Aaron's "Comparing Kits" plot did a nice job showing each of the possible comparisons.  By using horizontal concat and slightly opaque marks, the plot was readible and fresh, unlike some the other bar charts that were created.
+
+b. Jared's "Comparing Twins" plot was quite difficult to interpret. This lack of readibility is attributed to the overplotting of the bars.  My first steps to mending this plot would be offsetting the bars, so that each bar is viewable, instead of stacked up.
+
+c. Graphics
+
+```{python}
+twins_wide = pd.read_json("https://calvin-data304.netlify.app/data/twins-genetics-wide.json")
+chart1 = alt.Chart(twins_wide).mark_point().encode(
+  x="Ancestry:Q",
+  y="23andMe:Q",
+  tooltip=["Ancestry:Q","23andMe:Q"],
+  color="region:N"
+).properties(width=200, height=200)
+
+chart2 = alt.Chart(twins_wide).mark_point().encode(
+  x="MyHeritage:Q",
+  y="Ancestry:Q",
+  tooltip=["Ancestry:Q","MyHeritage:Q"],
+  color="region:N"
+).properties(width=200, height=200)
+
+chart3 = alt.Chart(twins_wide).mark_point().encode(
+  x="23andMe:Q",
+  y="MyHeritage:Q",
+  tooltip=["MyHeritage:Q","23andMe:Q"],
+  color="region:N"
+).properties(width=200, height=200)
+
+alt.hconcat(chart1, chart2, chart3).properties(title="Genetic Share Scores of Various DNA Test Kits")
+```
+
+```{python}
+twins_long = pd.read_json("https://calvin-data304.netlify.app/data/twins-genetics-long.json")
+
+chart_twins = alt.Chart(twins_long).mark_bar().encode(
+  x="twin:N",
+  y="genetic share:Q",
+  xOffset="kit:N",
+  color="kit:N"
+)
+chart_twins
+```
+d. The first chart helps us understand some of the variation between 3 DNA test kits.  Each of these kits gathers a score that numerically represents the genetic makeup of a person. By viewing that each of the bar for each of the individuals remain relatively within close range of eachother, we determine that each of the kits reinforce eachothers' genetic prediction.  Additionally, by viewing how one test predicts on both twins, we can determine whether the test predicts accuractly, as the twin will have the same genetic makeup.  Turning our attention over to the scatterplots, we can verify whether test kits are predicting similar genetic scores.  So long as the points fall along the 45 degree angle line, the two tests plotted are predicting close to the same scores, which reinforces their claim to accuracy.
+
+### Part 2: HW7 Revisions
+
+Importing and wrangling data
+
+```{python}
+#| code-fold: true 
+gas_gap_data_url = "https://calvin-data304.netlify.app/data/pump_price_for_gasoline_us_per_liter.csv"
+gas_gap_data = pd.read_csv(gas_gap_data_url)
+```
+
+```{python}
+#| code-fold: true 
+gas_gap_data.at[35, 'country'] = "Congo, Democratic Republic of the"
+gas_gap_data.at[172, 'country'] = "United States of America"
+gas_gap_data.at[58, 'country'] = "United Kingdom of Great Britain and Northern Ireland"
+gas_gap_data.at[85, 'country'] = "Kyrgyzstan"
+gas_gap_data.at[19, 'country'] = "Bosnia and Herzegovina"
+gas_gap_data.at[33, 'country'] = "Côte d'Ivoire"
+gas_gap_data.at[4, 'country'] = "United Arab Emirates"
+gas_gap_data.at[103, 'country'] = "Moldova, Republic of"
+gas_gap_data.at[90, 'country'] = "Lao People's Democratic Republic"
+gas_gap_data.at[154, 'country'] = "Slovakia"
+gas_gap_data.at[135, 'country'] = "Korea (Democratic People's Republic of)"
+gas_gap_data.at[87, 'country'] = "Korea, Republic of"
+gas_gap_data.at[22, 'country'] = "Bolivia (Plurinational State of)"
+gas_gap_data.at[138, 'country'] = "Palestine, State of"
+gas_gap_data.at[94, 'country'] = "Saint Lucia"
+gas_gap_data.at[168, 'country'] = "Tanzania, United Republic of"
+gas_gap_data.at[142, 'country'] = "Russian Federation"
+gas_gap_data.at[42, 'country'] = "Czechia"
+gas_gap_data.at[36, 'country'] = "Congo"
+gas_gap_data.at[38, 'country'] = "Cabo Verde"
+gas_gap_data.at[25, 'country'] = "Brunei Darussalam"
+gas_gap_data.at[75, 'country'] = "Iran (Islamic Republic of)"
+gas_gap_data.at[67, 'country'] = "Hong Kong"
+gas_gap_data.at[175, 'country'] = "Viet Nam"
+gas_gap_data.at[158, 'country'] = "Syrian Arab Republic"
+gas_gap_data = gas_gap_data.drop(174) # drops Venezuela
+gas_gap_data = gas_gap_data.drop(88) # drops Kosovo
+```
+
+```{python}
+#| code-fold: true 
+# Add additional information about each country from secondary dataset
+country_conversion_data = pd.read_csv("https://raw.githubusercontent.com/lukes/ISO-3166-Countries-with-Regional-Codes/master/all/all.csv")
+country_conversion_data = country_conversion_data.rename(columns={'name': 'country'})
+merged_gas_data = pd.merge(gas_gap_data, country_conversion_data, on='country', how='left')
+```
+
+```{python}
+input_dropdown = alt.binding_select(options=['Europe','Africa','Americas', 'Asia', 'Oceania'], name='Region ')
+selection = alt.selection_point(fields=['region'], bind=input_dropdown)
+color = alt.condition(
+    selection,
+    alt.Color('region:N').legend(None),
+    alt.value('lightgray')
+)
+gas_chart = alt.Chart(merged_gas_data).mark_point().encode(
+    x='2016:Q',
+    y='2008:Q',
+    color=color,
+    tooltip='country:N'
+).add_params(
+    selection
+)
+gas_chart
+```
