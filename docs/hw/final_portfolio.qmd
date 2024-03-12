@@ -17,11 +17,11 @@ alt.data_transformers.disable_max_rows()
 
 ### Part 1: HW3 Revisions
 
-a. I thought that Aaron's "Comparing Kits" plot did a nice job showing each of the possible comparisons.  By using horizontal concat and slightly opaque marks, the plot was readible and fresh, unlike some the other bar charts that were created.
+a.  I thought that Aaron's "Comparing Kits" plot did a nice job showing each of the possible comparisons. By using horizontal concat and slightly opaque marks, the plot was readible and fresh, unlike some the other bar charts that were created.
 
-b. Jared's "Comparing Twins" plot was quite difficult to interpret. This lack of readibility is attributed to the overplotting of the bars.  My first steps to mending this plot would be offsetting the bars, so that each bar is viewable, instead of stacked up.
+b.  Jared's "Comparing Twins" plot was quite difficult to interpret. This lack of readibility is attributed to the overplotting of the bars. My first steps to mending this plot would be offsetting the bars, so that each bar is viewable, instead of stacked up.
 
-c. Graphics
+c.  Graphics
 
 ```{python}
 twins_wide = pd.read_json("https://calvin-data304.netlify.app/data/twins-genetics-wide.json")
@@ -60,7 +60,8 @@ chart_twins = alt.Chart(twins_long).mark_bar().encode(
 )
 chart_twins
 ```
-d. The first chart helps us understand some of the variation between 3 DNA test kits.  Each of these kits gathers a score that numerically represents the genetic makeup of a person. By viewing that each of the bar for each of the individuals remain relatively within close range of eachother, we determine that each of the kits reinforce eachothers' genetic prediction.  Additionally, by viewing how one test predicts on both twins, we can determine whether the test predicts accuractly, as the twin will have the same genetic makeup.  Turning our attention over to the scatterplots, we can verify whether test kits are predicting similar genetic scores.  So long as the points fall along the 45 degree angle line, the two tests plotted are predicting close to the same scores, which reinforces their claim to accuracy.
+
+d.  The first chart helps us understand some of the variation between 3 DNA test kits. Each of these kits gathers a score that numerically represents the genetic makeup of a person. By viewing that each of the bar for each of the individuals remain relatively within close range of eachother, we determine that each of the kits reinforce eachothers' genetic prediction. Additionally, by viewing how one test predicts on both twins, we can determine whether the test predicts accuractly, as the twin will have the same genetic makeup. Turning our attention over to the scatterplots, we can verify whether test kits are predicting similar genetic scores. So long as the points fall along the 45 degree angle line, the two tests plotted are predicting close to the same scores, which reinforces their claim to accuracy.
 
 ### Part 2: HW7 Revisions
 
@@ -130,19 +131,17 @@ gas_chart = alt.Chart(merged_gas_data).mark_point().encode(
 gas_chart
 ```
 
-
 ### Part 4
+
 ```{python}
 mil_burden_data = pd.read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQ1VEvkp0P9PDBKB1CqUMxezcMrwY_uasIMl8BXeI2AWyrfDKGuas-ABT7iEkCT2xhf_eeHpk2KUZ-E/pub?gid=750436318&single=true&output=csv")
 ```
-```{python}
-gdp_data=pd.read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQNbLPnp92AH32qhzqumYipuIpeOvHdhTyVCYk2bUXfNHsaTfJc6E946tHdmwVH4vcTaO8P5vfQSIyv/pub?gid=1425435438&single=true&output=csv")
-```
 
 ```{python}
-# Given the countries defense burden and their gpd, we calculate their defense budget in 2022
-mil_burden_data['2022_def_total_spent'] = (mil_burden_data['2022'] * gdp_data["2022"])/100
-mil_burden_data['gdp_2022'] = gdp_data['2022']
+mil_burden_data.at[251, 'Country Name'] = "United States of America"
+mil_burden_data.at[203, 'Country Name'] = "Russia"
+mil_burden_data.at[112, 'Country Name'] = "Iran"
+mil_burden_data.at[43, 'Country Name'] = "Dem. Rep. Congo"
 ```
 
 ```{python}
@@ -152,7 +151,7 @@ country_map = alt.Chart(countries).mark_geoshape(
     stroke='#000000'
 ).project('mercator')
 
-country_map.properties(width = 600, height = 400)
+country_map.properties(width = 1000, height = 750)
 ```
 
 ```{python}
@@ -163,13 +162,31 @@ choropleth = country_map.transform_lookup(
     fill = "2022:Q",
     stroke = alt.Stroke(value="black"),
     tooltip = ["properties.name:O", "2022:Q"]
-    ).properties(width = 600, height = 400)
+    ).properties(width = 1000, height = 750)
     
 country_map + choropleth
 ```
 
+I am currently taking POLS 217 (International Cooperation and Conflict). Our professor noted that there were no recent maps on the internet that displayed the defense burden of each country. After finding a dataset collected and compiled by the World Bank that contained this metric for many countries, we decided to create a chlorepleth world map and map the defense burden of each country in 2022 to each country. The quantitative color scale maps out what percent of the country's overall GDP was spent on their military. Most of the countries spent less than 10% of their GDP on their military, while Ukraine spent more than 30% of their GDP on their military. I will be perfecting and continuing to update this map as time allows, but presently, this is the final version for the portfolio.
 
+### Part 5
 
+1.  an encoding channel other than x or y.
 
+    -   In part 2 of this portfolio, we mapped the variable region to the color channel.
 
+2.  layers
 
+    -   The world map depicts layering, as the second map is layered with two maps. The bottom map has a basic outline of the map of the world with all of the country boundaries drawn in. The second layer fills in the countries with color if there is data for that country. However, the underlying layer is still there.
+
+3.  concatenation
+
+    -   Concatenation can be seen in the comparing kits plot, where we implemented a horizontal concat.
+
+4.  non-default configuration of a channel’s scale or guide
+
+    -   One example of adjustments made to the scale was in the "Comparing Twins" chart, where we see the implementation of XOffset. Another example was in the gas chart, where we see that the legend was set to None. This was done to prevent confusion when only one of the values of the variable was selected to show.
+
+5.  interaction (tooltips, panning/zooming, brushing, etc.)
+
+    -   We used several tooltips. One example is in the map, where we added a tooltip to show the name of the country and the country's defense burden when the cursor hovered over the country.
